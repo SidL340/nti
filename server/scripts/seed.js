@@ -131,10 +131,15 @@ const run = async () => {
     console.log(`🌱  Seeded ${services.length} services`);
 
     // ── Create admin user ────────────────────────────────────
+    if (!process.env.ADMIN_PASSWORD) {
+      console.error("❌  ADMIN_PASSWORD environment variable not set. Aborting seeding for safety.");
+      process.exit(1);
+    }
+
     await User.create({
       name:     "Nirmala Tech Admin",
       email:    process.env.ADMIN_EMAIL    || "admin@nirmalatech.com.np",
-      password: process.env.ADMIN_PASSWORD || "Admin@NTI2024",
+      password: process.env.ADMIN_PASSWORD,
       role:     "admin",
     });
     console.log("👤  Admin user created");
