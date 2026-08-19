@@ -1,0 +1,139 @@
+/* src/index.css — Global styles, Tailwind directives & Advanced Motion Design */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans selection:bg-brand-500 selection:text-white;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* ── Button variants ── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl
+           bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700 text-white font-bold text-sm
+           shadow-lg shadow-brand-500/25 hover:shadow-xl hover:shadow-brand-500/40
+           hover:scale-[1.03] active:scale-[0.98]
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl
+           bg-white text-slate-800 font-bold text-sm border border-slate-200/80
+           shadow-sm hover:shadow-md hover:bg-slate-50 hover:border-brand-300 hover:text-brand-600
+           hover:scale-[1.03] active:scale-[0.98]
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl
+           text-slate-600 font-semibold text-sm
+           hover:bg-slate-100 hover:text-slate-900 active:scale-[0.98]
+           transition-all duration-200;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl
+           bg-red-500 text-white font-semibold text-sm
+           hover:bg-red-600 active:scale-[0.98] transition-all duration-200 shadow-sm;
+  }
+
+  /* ── Card Styles ── */
+  .card {
+    @apply bg-white rounded-3xl shadow-card border border-slate-100/80
+           transition-all duration-300 hover:shadow-card-hover;
+  }
+
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-xl
+           transition-all duration-300 hover:shadow-2xl hover:border-brand-200/80;
+  }
+
+  .glass-dark {
+    @apply bg-slate-900/60 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl text-white;
+  }
+
+  /* ── Form inputs ── */
+  .form-input {
+    @apply w-full px-4 py-3.5 rounded-2xl border border-slate-200
+           bg-slate-50/50 text-slate-800 placeholder-slate-400
+           focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500
+           transition-all duration-200 text-sm font-medium;
+  }
+  .form-label {
+    @apply block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2;
+  }
+
+  /* ── Badge ── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-tight;
+  }
+  .badge-blue   { @apply bg-brand-50 text-brand-700 border border-brand-100; }
+  .badge-green  { @apply bg-emerald-50 text-emerald-700 border border-emerald-100; }
+  .badge-amber  { @apply bg-amber-50 text-amber-700 border border-amber-100; }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .grid-dots {
+    background-image: radial-gradient(circle, rgba(99, 102, 241, 0.25) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+
+  /* Smooth Marquee animation */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: 200%;
+    animation: marquee 25s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Subtle shimmer light effect */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .animate-shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+}
