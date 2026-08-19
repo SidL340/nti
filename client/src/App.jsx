@@ -4,7 +4,7 @@
  * Admin routes are wrapped in <ProtectedRoute />.
  */
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth }                   from "./context/AuthContext.jsx";
 
 // ── Layout ───────────────────────────────────────────────────
@@ -34,7 +34,7 @@ const ProtectedRoute = ({ children }) => {
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           {/* ── Public routes ── */}
           <Route element={<PublicLayout />}>
@@ -66,7 +66,7 @@ export default function App() {
           {/* ── 404 fallback ── */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }
