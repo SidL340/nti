@@ -21,7 +21,7 @@ const protect = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, (process.env.JWT_SECRET || "nti_super_secret_jwt_key_2024"));
     // Attach user (without password) to request
     req.user = await User.findById(decoded.id).select("-password");
     if (!req.user) {

@@ -9,7 +9,7 @@ import User         from "../models/User.js";
 
 // ─── Helper: sign JWT ────────────────────────────────────────
 const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, {
+  jwt.sign({ id }, (process.env.JWT_SECRET || "nti_super_secret_jwt_key_2024"), {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
   });
 
