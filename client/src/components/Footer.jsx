@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Facebook, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const quickLinks = [
   { to: "/",          label: "Home"      },
@@ -19,13 +19,13 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800">
+    <footer className="bg-slate-950 text-slate-400 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand column */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-white p-1 border border-slate-200 shadow-sm flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-slate-900 p-1 border border-slate-800 shadow-sm flex items-center justify-center shrink-0">
                 <img src="/logo.png" alt="Nirmala Tech Innovations" className="w-full h-full object-contain" />
               </div>
               <div>

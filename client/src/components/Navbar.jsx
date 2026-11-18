@@ -24,21 +24,21 @@ export default function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200"
-          : "bg-white border-b border-slate-200"
+          ? "bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-slate-800"
+          : "bg-slate-950 border-b border-slate-800/80"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-20 px-4 md:px-8">
         {/* Brand Logo & Name */}
         <Link to="/" className="flex items-center gap-3.5 group">
-          <div className="w-12 h-12 rounded-xl bg-white p-1 border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 rounded-xl bg-slate-900 p-1 border border-slate-800 shadow-md flex items-center justify-center overflow-hidden">
             <img src="/logo.png" alt="Nirmala Tech Innovations" className="w-full h-full object-contain" />
           </div>
           <div>
-            <p className="font-display font-black text-slate-900 text-base md:text-lg leading-tight tracking-tight">
+            <p className="font-display font-black text-white text-base md:text-lg leading-tight tracking-tight">
               Nirmala Tech Innovations
             </p>
-            <p className="text-[11px] text-blue-700 leading-none tracking-wider uppercase font-extrabold mt-0.5">
+            <p className="text-[11px] text-blue-400 leading-none tracking-wider uppercase font-bold mt-0.5">
               Pvt. Ltd. • Brindaban, Rautahat
             </p>
           </div>
@@ -54,8 +54,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                   isActive
-                    ? "text-blue-700 bg-blue-50 font-bold"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+                    ? "text-blue-400 bg-slate-900 border border-slate-800 font-bold"
+                    : "text-slate-300 hover:text-white hover:bg-slate-900"
                 }`
               }
             >
@@ -68,14 +68,14 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <a
             href="tel:+9779812225102"
-            className="flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-blue-700 transition-colors"
+            className="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-blue-400 transition-colors"
           >
-            <Phone size={15} className="text-blue-600" />
+            <Phone size={15} className="text-blue-400" />
             +977 9812225102
           </a>
           <Link
             to="/contact"
-            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm transition-colors"
+            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold shadow-md transition-colors"
           >
             Get a Quote
           </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
         {/* Mobile menu trigger */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100"
+          className="md:hidden p-2 rounded-lg text-slate-300 hover:bg-slate-900"
           aria-label="Toggle Navigation"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -93,7 +93,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {open && (
-        <div className="md:hidden bg-white border-t border-slate-200 shadow-lg px-4 py-4 space-y-1">
+        <div className="md:hidden bg-slate-950 border-t border-slate-800 shadow-xl px-4 py-4 space-y-1">
           {links.map(({ to, label }) => (
             <NavLink
               key={to}
@@ -102,7 +102,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `flex items-center justify-between px-4 py-3 rounded-lg text-sm font-bold ${
-                  isActive ? "bg-blue-600 text-white" : "text-slate-800 hover:bg-slate-100"
+                  isActive ? "bg-blue-600 text-white" : "text-slate-300 hover:bg-slate-900"
                 }`
               }
             >
@@ -110,12 +110,12 @@ export default function Navbar() {
               <ChevronRight size={16} />
             </NavLink>
           ))}
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+          <div className="pt-3 border-t border-slate-800 flex flex-col gap-2">
             <a
               href="tel:+9779812225102"
-              className="flex items-center justify-center gap-2 py-2.5 text-sm font-bold text-slate-800 bg-slate-100 rounded-lg"
+              className="flex items-center justify-center gap-2 py-2.5 text-sm font-bold text-slate-200 bg-slate-900 rounded-lg border border-slate-800"
             >
-              <Phone size={15} className="text-blue-600" /> +977 9812225102
+              <Phone size={15} className="text-blue-400" /> +977 9812225102
             </a>
             <Link
               to="/contact"

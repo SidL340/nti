@@ -5,7 +5,7 @@ import {
   ArrowRight, CheckCircle2,
   ArrowUpRight, Check, MapPin, Phone,
 } from "lucide-react";
-import { fetchProjects, fetchServices } from "../../api/services.js";
+import { fetchProjects } from "../../api/services.js";
 
 const serviceCapabilities = [
   {
@@ -79,10 +79,10 @@ export default function HomePage() {
   const safeProjects = Array.isArray(projects) ? projects : [];
 
   return (
-    <div className="overflow-x-hidden pt-20">
+    <div className="overflow-x-hidden pt-20 bg-slate-950 text-slate-300">
 
       {/* ══════════════════ 1. HERO SECTION ══════════════════ */}
-      <section className="bg-slate-950 text-white border-b border-slate-800 py-20 lg:py-28 relative">
+      <section className="bg-slate-950 border-b border-slate-800/80 py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -126,7 +126,7 @@ export default function HomePage() {
               </div>
 
               {/* Corporate Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-slate-800 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-slate-800/80 text-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-blue-400 shrink-0">
                     <MapPin size={18} />
@@ -150,9 +150,9 @@ export default function HomePage() {
 
             {/* Right Company Overview Card */}
             <div className="lg:col-span-5">
-              <div className="bg-slate-900 rounded-2xl border border-slate-800 p-8 shadow-xl">
+              <div className="bg-slate-900/90 rounded-2xl border border-slate-800 p-8 shadow-card">
                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-800">
-                  <div className="w-14 h-14 rounded-xl bg-white p-1.5 shadow-xs flex items-center justify-center shrink-0">
+                  <div className="w-14 h-14 rounded-xl bg-slate-950 p-1.5 border border-slate-800 shadow-sm flex items-center justify-center shrink-0">
                     <img src="/logo.png" alt="Nirmala Tech Innovations" className="w-full h-full object-contain" />
                   </div>
                   <div>
@@ -205,16 +205,16 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════ 2. CORE CAPABILITIES ══════════════════ */}
-      <section className="py-20 bg-white border-b border-slate-200">
+      <section className="py-20 bg-slate-900/60 border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-blue-700 font-bold text-xs uppercase tracking-wider mb-2">
+            <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
               Comprehensive Technology Solutions
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-black text-slate-900 mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-white mb-4">
               What We Do Best
             </h2>
-            <p className="text-slate-600 text-base leading-relaxed">
+            <p className="text-slate-300 text-base leading-relaxed">
               From engineering scalable web platforms to physically installing enterprise-grade surveillance networks, we cover your complete digital and IT lifecycle.
             </p>
           </div>
@@ -223,23 +223,23 @@ export default function HomePage() {
             {serviceCapabilities.map(({ title, desc, icon: Icon }) => (
               <div
                 key={title}
-                className="bg-slate-50 rounded-2xl p-8 border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between"
+                className="bg-slate-900 rounded-2xl p-8 border border-slate-800 shadow-card hover:shadow-card-hover hover:border-slate-700 transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700/80 flex items-center justify-center text-blue-400 mb-6">
                     <Icon size={24} />
                   </div>
-                  <h3 className="font-display font-bold text-slate-900 text-xl mb-3">
+                  <h3 className="font-display font-bold text-white text-xl mb-3">
                     {title}
                   </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  <p className="text-slate-300 text-sm leading-relaxed mb-6">
                     {desc}
                   </p>
                 </div>
                 <div>
                   <Link
                     to="/services"
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-700 hover:text-blue-800"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-400 hover:text-blue-300"
                   >
                     View Details <ArrowRight size={15} />
                   </Link>
@@ -251,16 +251,16 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════ 3. WHY PARTNER WITH US ══════════════════ */}
-      <section className="py-20 bg-slate-50 border-b border-slate-200">
+      <section className="py-20 bg-slate-950 border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-blue-700 font-bold text-xs uppercase tracking-wider mb-2">
+            <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
               The Nirmala Tech Advantage
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-black text-slate-900 mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-white mb-4">
               Why Choose Our Services?
             </h2>
-            <p className="text-slate-600 text-base leading-relaxed">
+            <p className="text-slate-300 text-base leading-relaxed">
               We combine software development expertise with physical IT hardware mastery, offering a single accountable tech partner.
             </p>
           </div>
@@ -284,12 +284,12 @@ export default function HomePage() {
                 desc: "Honest scopes, milestone-based execution, and full warranty support with zero hidden fees.",
               },
             ].map(({ title, desc }) => (
-              <div key={title} className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm mb-4">
+              <div key={title} className="bg-slate-900 p-7 rounded-2xl border border-slate-800 shadow-card">
+                <div className="w-8 h-8 rounded-lg bg-slate-800 text-blue-400 flex items-center justify-center font-bold text-sm mb-4 border border-slate-700">
                   <Check size={18} />
                 </div>
-                <h3 className="font-display font-bold text-slate-900 text-lg mb-2">{title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{desc}</p>
+                <h3 className="font-display font-bold text-white text-lg mb-2">{title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -297,30 +297,30 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════ 4. WORKFLOW ROADMAP ══════════════════ */}
-      <section className="py-20 bg-white border-b border-slate-200">
+      <section className="py-20 bg-slate-900/60 border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-blue-700 font-bold text-xs uppercase tracking-wider mb-2">
+            <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
               Our Methodology
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-black text-slate-900 mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-white mb-4">
               Structured 4-Step Process
             </h2>
-            <p className="text-slate-600 text-base leading-relaxed">
+            <p className="text-slate-300 text-base leading-relaxed">
               Every project is managed with clear milestones, regular status updates, and professional execution.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {workflowSteps.map(({ step, title, desc }) => (
-              <div key={step} className="bg-slate-50 p-8 rounded-2xl border border-slate-200 flex flex-col">
-                <span className="font-display font-black text-3xl text-blue-600 mb-4 block">
+              <div key={step} className="bg-slate-900 p-8 rounded-2xl border border-slate-800 flex flex-col shadow-card">
+                <span className="font-display font-black text-3xl text-blue-400 mb-4 block">
                   {step}
                 </span>
-                <h3 className="font-display font-bold text-slate-900 text-lg mb-2">
+                <h3 className="font-display font-bold text-white text-lg mb-2">
                   {title}
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed">
                   {desc}
                 </p>
               </div>
@@ -331,14 +331,14 @@ export default function HomePage() {
 
       {/* ══════════════════ 5. FEATURED PORTFOLIO ══════════════════ */}
       {safeProjects.length > 0 && (
-        <section className="py-20 bg-slate-50 border-b border-slate-200">
+        <section className="py-20 bg-slate-950 border-b border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
               <div>
-                <p className="text-blue-700 font-bold text-xs uppercase tracking-wider mb-2">
+                <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
                   Demonstrated Capabilities
                 </p>
-                <h2 className="font-display text-3xl sm:text-4xl font-black text-slate-900">
+                <h2 className="font-display text-3xl sm:text-4xl font-black text-white">
                   Featured Projects
                 </h2>
               </div>
@@ -353,9 +353,9 @@ export default function HomePage() {
               {safeProjects.map((p) => (
                 <div
                   key={p._id}
-                  className="bg-white rounded-2xl border border-slate-200 shadow-card overflow-hidden flex flex-col group hover:shadow-card-hover transition-all"
+                  className="bg-slate-900 rounded-2xl border border-slate-800 shadow-card overflow-hidden flex flex-col hover:border-slate-700 transition-all"
                 >
-                  <div className="relative overflow-hidden h-52 bg-slate-100">
+                  <div className="relative overflow-hidden h-52 bg-slate-950">
                     {p.image?.url ? (
                       <img
                         src={p.image.url}
@@ -363,7 +363,7 @@ export default function HomePage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">
+                      <div className="w-full h-full bg-slate-950 flex items-center justify-center text-slate-600">
                         <Code2 size={40} />
                       </div>
                     )}
@@ -375,10 +375,10 @@ export default function HomePage() {
                   </div>
 
                   <div className="p-6 flex flex-col flex-1">
-                    <h3 className="font-display font-bold text-slate-900 text-lg mb-2">
+                    <h3 className="font-display font-bold text-white text-lg mb-2">
                       {p.title}
                     </h3>
-                    <p className="text-slate-600 text-sm mb-4 line-clamp-2 leading-relaxed flex-1">
+                    <p className="text-slate-300 text-sm mb-4 line-clamp-2 leading-relaxed flex-1">
                       {p.description}
                     </p>
 
@@ -387,7 +387,7 @@ export default function HomePage() {
                         href={p.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-700 hover:text-blue-800 mt-2"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-400 hover:text-blue-300 mt-2"
                       >
                         Live Demonstration <ArrowUpRight size={16} />
                       </a>
@@ -401,7 +401,7 @@ export default function HomePage() {
       )}
 
       {/* ══════════════════ 6. FINAL CALL TO ACTION ══════════════════ */}
-      <section className="py-20 bg-slate-950 text-white">
+      <section className="py-20 bg-slate-950 text-white border-t border-slate-800/80">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-3">
             Get In Touch

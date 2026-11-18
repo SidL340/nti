@@ -4,11 +4,11 @@ import { CheckCircle2, Code2, Camera, Network, TrendingUp, GraduationCap, ArrowR
 import { fetchServices } from "../../api/services.js";
 
 const categoryMeta = {
-  "Software & Web Development": { icon: Code2,        badge: "bg-blue-50 text-blue-700 border-blue-200" },
-  "Security & Surveillance":    { icon: Camera,       badge: "bg-slate-100 text-slate-800 border-slate-300" },
-  "IT Infrastructure":          { icon: Network,      badge: "bg-indigo-50 text-indigo-700 border-indigo-200" },
-  "Digital Marketing & Media":  { icon: TrendingUp,   badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-  "IT Education & Training":    { icon: GraduationCap,badge: "bg-amber-50 text-amber-800 border-amber-200" },
+  "Software & Web Development": { icon: Code2,        badge: "bg-slate-800 text-blue-400 border-slate-700" },
+  "Security & Surveillance":    { icon: Camera,       badge: "bg-slate-800 text-slate-200 border-slate-700" },
+  "IT Infrastructure":          { icon: Network,      badge: "bg-slate-800 text-indigo-400 border-slate-700" },
+  "Digital Marketing & Media":  { icon: TrendingUp,   badge: "bg-slate-800 text-emerald-400 border-slate-700" },
+  "IT Education & Training":    { icon: GraduationCap,badge: "bg-slate-800 text-amber-400 border-slate-700" },
 };
 
 const defaultServices = [
@@ -84,9 +84,9 @@ export default function ServicesPage() {
     : safeServices.filter((s) => s.category === activeFilter);
 
   return (
-    <div className="pt-20 overflow-x-hidden">
+    <div className="pt-20 overflow-x-hidden bg-slate-950 text-slate-300">
       {/* ── Hero ── */}
-      <section className="bg-slate-950 text-white border-b border-slate-800 py-20 px-4">
+      <section className="bg-slate-950 border-b border-slate-800/80 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-4">
             Capabilities & Service Offerings
@@ -101,7 +101,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Filter Tabs ── */}
-      <div className="sticky top-20 z-40 bg-white border-b border-slate-200 shadow-sm">
+      <div className="sticky top-20 z-40 bg-slate-950 border-b border-slate-800/80 shadow-md">
         <div className="max-w-7xl mx-auto px-4 md:px-8 overflow-x-auto">
           <div className="flex gap-2 py-3 min-w-max">
             {categories.map((cat) => (
@@ -111,7 +111,7 @@ export default function ServicesPage() {
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                   activeFilter === cat
                     ? "bg-blue-600 text-white shadow-xs"
-                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                    : "text-slate-400 hover:bg-slate-900 hover:text-white"
                 }`}
               >
                 {cat}
@@ -122,12 +122,12 @@ export default function ServicesPage() {
       </div>
 
       {/* ── Services Grid ── */}
-      <section className="py-20 bg-slate-50 min-h-[500px]">
+      <section className="py-20 bg-slate-900/40 min-h-[500px]">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="bg-white p-8 rounded-2xl border border-slate-200 h-64 animate-pulse" />
+                <div key={i} className="bg-slate-900 p-8 rounded-2xl border border-slate-800 h-64 animate-pulse" />
               ))}
             </div>
           ) : (
@@ -135,17 +135,17 @@ export default function ServicesPage() {
               {filtered.map((service) => {
                 const meta = categoryMeta[service.category] || {
                   icon: Code2,
-                  badge: "bg-slate-100 text-slate-800 border-slate-300",
+                  badge: "bg-slate-800 text-slate-300 border-slate-700",
                 };
                 const Icon = meta.icon;
 
                 return (
                   <div
                     key={service._id}
-                    className="bg-white rounded-2xl p-8 border border-slate-200 shadow-card flex flex-col h-full hover:shadow-card-hover transition-all"
+                    className="bg-slate-900 rounded-2xl p-8 border border-slate-800 shadow-card flex flex-col h-full hover:border-slate-700 transition-all"
                   >
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400">
                         <Icon size={22} />
                       </div>
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold border ${meta.badge}`}>
@@ -153,19 +153,19 @@ export default function ServicesPage() {
                       </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-slate-900 text-xl mb-3">
+                    <h3 className="font-display font-bold text-white text-xl mb-3">
                       {service.title}
                     </h3>
 
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-1">
+                    <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-1">
                       {service.shortDescription}
                     </p>
 
                     {service.features?.length > 0 && (
-                      <div className="space-y-2 pt-4 border-t border-slate-100 mb-6">
+                      <div className="space-y-2 pt-4 border-t border-slate-800/80 mb-6">
                         {service.features.map((f) => (
-                          <div key={f} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
-                            <CheckCircle2 size={15} className="text-blue-600 shrink-0 mt-0.5" />
+                          <div key={f} className="flex items-start gap-2 text-xs text-slate-300 font-medium">
+                            <CheckCircle2 size={15} className="text-blue-400 shrink-0 mt-0.5" />
                             <span>{f}</span>
                           </div>
                         ))}
@@ -175,7 +175,7 @@ export default function ServicesPage() {
                     <div className="pt-2">
                       <Link
                         to="/contact"
-                        className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-700 hover:text-blue-800"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-400 hover:text-blue-300"
                       >
                         Request Consultation <ArrowRight size={15} />
                       </Link>
@@ -187,7 +187,7 @@ export default function ServicesPage() {
           )}
 
           {/* Bottom Card */}
-          <div className="mt-16 p-10 bg-slate-900 text-white rounded-2xl border border-slate-800 text-center">
+          <div className="mt-16 p-10 bg-slate-900 text-white rounded-2xl border border-slate-800 text-center shadow-card">
             <h3 className="font-display text-2xl font-bold mb-3">
               Need a Customized Technical Scope?
             </h3>
@@ -196,7 +196,7 @@ export default function ServicesPage() {
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors shadow-md"
             >
               Contact Our Engineers <ArrowRight size={16} />
             </Link>
