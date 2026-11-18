@@ -1,4 +1,5 @@
-﻿import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import PublicLayout from "./layouts/PublicLayout.jsx";
@@ -23,7 +24,7 @@ function ProtectedRoute({ children }) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        <div className="w-8 h-8 rounded-full border-4 border-brand-500 border-t-transparent animate-spin" />
+        <div className="w-8 h-8 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
       </div>
     );
   }
@@ -36,7 +37,7 @@ export default function App() {
       <Router>
         <Toaster position="top-right" />
         <Routes>
-          {/* Standalone Admin Login Route */}
+          {/* Standalone Admin Login */}
           <Route path="/admin/login" element={<LoginPage />} />
 
           {/* Protected Admin CMS Panel */}
@@ -63,7 +64,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
           </Route>
 
-          {/* Catch all redirect to home */}
+          {/* Catch-all redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

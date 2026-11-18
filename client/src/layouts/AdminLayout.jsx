@@ -98,7 +98,7 @@ export default function AdminLayout() {
 
       {/* ── Main content area ── */}
       <div className="ml-64 flex-1 flex flex-col min-h-screen">
-        <header className="bg-white border-b border-slate-200 px-8 py-4 sticky top-0 z-30 flex items-center justify-between shadow-2xs">
+        <header className="bg-white border-b border-slate-200 px-8 py-4 sticky top-0 z-30 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-2">
             <span className="font-display font-black text-slate-900 text-sm">
               Nirmala Tech Innovations Pvt. Ltd.
