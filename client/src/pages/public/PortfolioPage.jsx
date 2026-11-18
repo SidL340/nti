@@ -10,13 +10,23 @@ export default function PortfolioPage() {
 
   useEffect(() => {
     fetchProjects()
-      .then(({ data }) => setProjects(data))
-      .catch(() => {})
+      .then((res) => {
+        const d = res?.data;
+        if (Array.isArray(d)) {
+          setProjects(d);
+        } else if (d && Array.isArray(d.data)) {
+          setProjects(d.data);
+        } else {
+          setProjects([]);
+        }
+      })
+      .catch(() => setProjects([]))
       .finally(() => setLoading(false));
   }, []);
 
-  const categories = ["All", ...new Set(projects.map((p) => p.category))];
-  const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const safeProjects = Array.isArray(projects) ? projects : [];
+  const categories = ["All", ...new Set(safeProjects.map((p) => p.category).filter(Boolean))];
+  const filtered = filter === "All" ? safeProjects : safeProjects.filter((p) => p.category === filter);
 
   return (
     <div className="pt-20 overflow-x-hidden">
@@ -45,7 +55,7 @@ export default function PortfolioPage() {
                 onClick={() => setFilter(cat)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                   filter === cat
-                    ? "bg-blue-600 text-white shadow-sm"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
@@ -66,7 +76,7 @@ export default function PortfolioPage() {
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 max-w-lg mx-auto p-8 shadow-sm">
+            <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 max-w-lg mx-auto p-8 shadow-xs">
               <Code2 size={40} className="mx-auto mb-3 text-slate-400" />
               <h3 className="font-display font-bold text-slate-900 text-lg mb-1">No Projects Listed Yet</h3>
               <p className="text-sm text-slate-600 mb-6">New case studies will be updated here as deployments conclude.</p>
@@ -94,7 +104,7 @@ export default function PortfolioPage() {
                       </div>
                     )}
                     {p.featured && (
-                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm">
+                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-xs">
                         Featured
                       </span>
                     )}

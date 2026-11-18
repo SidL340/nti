@@ -2,18 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Code2, Camera, Network, TrendingUp, GraduationCap,
-  ArrowRight, CheckCircle2, Shield, Headphones,
-  Server, ArrowUpRight, Check, MapPin, Mail, Phone,
+  ArrowRight, CheckCircle2,
+  ArrowUpRight, Check, MapPin, Phone,
 } from "lucide-react";
 import { fetchProjects, fetchServices } from "../../api/services.js";
-
-const categoryIcons = {
-  "Software & Web Development": Code2,
-  "Security & Surveillance":    Camera,
-  "IT Infrastructure":          Network,
-  "Digital Marketing & Media":  TrendingUp,
-  "IT Education & Training":    GraduationCap,
-};
 
 const serviceCapabilities = [
   {
@@ -68,12 +60,23 @@ const workflowSteps = [
 
 export default function HomePage() {
   const [projects, setProjects] = useState([]);
-  const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetchProjects({ featured: true }).then(({ data }) => setProjects(data.slice(0, 3))).catch(() => {});
-    fetchServices().then(({ data }) => setServices(data)).catch(() => {});
+    fetchProjects({ featured: true })
+      .then((res) => {
+        const d = res?.data;
+        if (Array.isArray(d)) {
+          setProjects(d.slice(0, 3));
+        } else if (d && Array.isArray(d.data)) {
+          setProjects(d.data.slice(0, 3));
+        } else {
+          setProjects([]);
+        }
+      })
+      .catch(() => setProjects([]));
   }, []);
+
+  const safeProjects = Array.isArray(projects) ? projects : [];
 
   return (
     <div className="overflow-x-hidden pt-20">
@@ -122,7 +125,7 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Genuine Corporate Pillars (No fake stats) */}
+              {/* Corporate Pillars */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-slate-800 text-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-blue-400 shrink-0">
@@ -149,7 +152,7 @@ export default function HomePage() {
             <div className="lg:col-span-5">
               <div className="bg-slate-900 rounded-2xl border border-slate-800 p-8 shadow-xl">
                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-800">
-                  <div className="w-14 h-14 rounded-xl bg-white p-1.5 shadow-sm flex items-center justify-center shrink-0">
+                  <div className="w-14 h-14 rounded-xl bg-white p-1.5 shadow-xs flex items-center justify-center shrink-0">
                     <img src="/logo.png" alt="Nirmala Tech Innovations" className="w-full h-full object-contain" />
                   </div>
                   <div>
@@ -327,7 +330,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════ 5. FEATURED PORTFOLIO ══════════════════ */}
-      {projects.length > 0 && (
+      {safeProjects.length > 0 && (
         <section className="py-20 bg-slate-50 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -347,7 +350,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((p) => (
+              {safeProjects.map((p) => (
                 <div
                   key={p._id}
                   className="bg-white rounded-2xl border border-slate-200 shadow-card overflow-hidden flex flex-col group hover:shadow-card-hover transition-all"
@@ -364,9 +367,11 @@ export default function HomePage() {
                         <Code2 size={40} />
                       </div>
                     )}
-                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm">
-                      {p.category}
-                    </span>
+                    {p.category && (
+                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-xs">
+                        {p.category}
+                      </span>
+                    )}
                   </div>
 
                   <div className="p-6 flex flex-col flex-1">

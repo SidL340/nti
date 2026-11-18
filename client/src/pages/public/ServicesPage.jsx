@@ -11,6 +11,51 @@ const categoryMeta = {
   "IT Education & Training":    { icon: GraduationCap,badge: "bg-amber-50 text-amber-800 border-amber-200" },
 };
 
+const defaultServices = [
+  {
+    _id: "s1",
+    title: "Custom Web Application & Portal Development",
+    category: "Software & Web Development",
+    shortDescription: "Tailor-made web applications, business portals, and cloud solutions engineered with modern MERN stack.",
+    features: ["Responsive design", "Secure authentication", "RESTful API backends", "Scalable database schema"],
+  },
+  {
+    _id: "s2",
+    title: "Enterprise ERP & Management Systems",
+    category: "Software & Web Development",
+    shortDescription: "Streamline accounts, inventory, HR, and sales operations with centralized software architectures.",
+    features: ["Role-based access", "Automated invoicing", "Real-time analytics", "Local data backup"],
+  },
+  {
+    _id: "s3",
+    title: "4K CCTV Surveillance & NVR Setup",
+    category: "Security & Surveillance",
+    shortDescription: "Complete enterprise-grade security camera installation with night-vision, remote mobile viewing, and warranty.",
+    features: ["High-definition IP cameras", "Remote phone streaming", "Continuous recording backup", "On-site maintenance"],
+  },
+  {
+    _id: "s4",
+    title: "Biometric Attendance & Access Control",
+    category: "Security & Surveillance",
+    shortDescription: "Fingerprint and facial recognition access control systems for offices, schools, and institutions.",
+    features: ["Automated timesheets", "Door lock integration", "Exportable payroll reports", "Multi-branch sync"],
+  },
+  {
+    _id: "s5",
+    title: "Structured Cabling & Server Network Racks",
+    category: "IT Infrastructure",
+    shortDescription: "Professional enterprise network cabling, patch panels, server racks, and high-speed routing.",
+    features: ["Cat6 Gigabit cabling", "Server rack organization", "Managed Wi-Fi coverage", "Bandwidth optimization"],
+  },
+  {
+    _id: "s6",
+    title: "Computer Hardware & IT AMC Support",
+    category: "IT Infrastructure",
+    shortDescription: "Supply, setup, and annual maintenance contracts (AMC) for desktops, laptops, printers, and UPS power.",
+    features: ["Original hardware procurement", "Regular preventive maintenance", "Quick emergency response", "Hardware repair"],
+  },
+];
+
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,15 +63,25 @@ export default function ServicesPage() {
 
   useEffect(() => {
     fetchServices()
-      .then(({ data }) => setServices(data))
-      .catch(() => {})
+      .then((res) => {
+        const d = res?.data;
+        if (Array.isArray(d) && d.length > 0) {
+          setServices(d);
+        } else if (d && Array.isArray(d.data) && d.data.length > 0) {
+          setServices(d.data);
+        } else {
+          setServices(defaultServices);
+        }
+      })
+      .catch(() => setServices(defaultServices))
       .finally(() => setLoading(false));
   }, []);
 
+  const safeServices = Array.isArray(services) && services.length > 0 ? services : defaultServices;
   const categories = ["All", ...Object.keys(categoryMeta)];
   const filtered = activeFilter === "All"
-    ? services
-    : services.filter((s) => s.category === activeFilter);
+    ? safeServices
+    : safeServices.filter((s) => s.category === activeFilter);
 
   return (
     <div className="pt-20 overflow-x-hidden">
@@ -55,7 +110,7 @@ export default function ServicesPage() {
                 onClick={() => setActiveFilter(cat)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                   activeFilter === cat
-                    ? "bg-blue-600 text-white shadow-sm"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
@@ -141,7 +196,7 @@ export default function ServicesPage() {
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors shadow-xs"
             >
               Contact Our Engineers <ArrowRight size={16} />
             </Link>
